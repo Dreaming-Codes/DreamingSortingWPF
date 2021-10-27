@@ -7,6 +7,7 @@
         Title="MainWindow" Height="500" Width="900"
         WindowStyle="None"
         ResizeMode="NoResize" Background="#181735">
+    
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="25" />
@@ -56,8 +57,40 @@
                 <RotateTransform Angle="50" />
             </Grid.RenderTransform>
 
-            <StackPanel Orientation="Horizontal" Margin="-350, 250, -255, -250">
-                <StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="-330, 230, -255, -250">
+                <StackPanel Margin="-225, 0, 0, 0">
+                    <StackPanel.RenderTransform>
+                        <TranslateTransform x:Name="SlideInAnimationLeft"/>
+                    </StackPanel.RenderTransform>
+                
+                    <StackPanel.Triggers>
+                        <EventTrigger RoutedEvent="Path.Loaded">
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <DoubleAnimation
+                                        Storyboard.TargetName="SlideInAnimationLeft"
+                                        Storyboard.TargetProperty="X"
+                                        To="200"
+                                        Duration="0:0:0.8"/>
+                                    <DoubleAnimation
+                                        Storyboard.TargetName="SlideInAnimationLeft"
+                                        Storyboard.TargetProperty="X"
+                                        To="400"
+                                        Duration="0:0:0.7"/>
+                                    <DoubleAnimation
+                                        Storyboard.TargetName="SlideInAnimationLeft"
+                                        Storyboard.TargetProperty="X"
+                                        To="320"
+                                        Duration="0:0:1"/>
+                                    <DoubleAnimation
+                                        Storyboard.TargetName="SlideInAnimationLeft"
+                                        Storyboard.TargetProperty="X"
+                                        To="300"
+                                        Duration="0:0:1"/>
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger>
+                    </StackPanel.Triggers>
                     <Border Width="700" Height="35" Background="#DA251D" Margin="150, 0, 0, 0" CornerRadius="20">
                         <Label Cursor="Hand" MouseDown="Nick_OnMouseDown" Margin="0, 0, 20, 0" Content="DreamingCodes" Foreground="White"
                                FontSize="18" HorizontalAlignment="Right" />
@@ -66,7 +99,39 @@
                     <Border Width="700" Height="35" Background="#009142" Margin="75, 15, 0, 0" CornerRadius="20" />
                     <Border Width="700" Height="35" Background="#F8C300" Margin="-100, 15, 0, 0" CornerRadius="20" />
                 </StackPanel>
-                <StackPanel>
+                <StackPanel Margin="620, 0, 0, 0">
+                    <StackPanel.RenderTransform>
+                        <TranslateTransform x:Name="SlideInAnimationRight"/>
+                    </StackPanel.RenderTransform>
+                
+                    <StackPanel.Triggers>
+                        <EventTrigger RoutedEvent="Path.Loaded">
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <DoubleAnimation
+                                        Storyboard.TargetName="SlideInAnimationRight"
+                                        Storyboard.TargetProperty="X"
+                                        To="-300"
+                                        Duration="0:0:0.8"/>
+                                    <DoubleAnimation
+                                        Storyboard.TargetName="SlideInAnimationRight"
+                                        Storyboard.TargetProperty="X"
+                                        To="-500"
+                                        Duration="0:0:0.7"/>
+                                    <DoubleAnimation
+                                        Storyboard.TargetName="SlideInAnimationRight"
+                                        Storyboard.TargetProperty="X"
+                                        To="-420"
+                                        Duration="0:0:1"/>
+                                    <DoubleAnimation
+                                        Storyboard.TargetName="SlideInAnimationRight"
+                                        Storyboard.TargetProperty="X"
+                                        To="-400"
+                                        Duration="0:0:1"/>
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger>
+                    </StackPanel.Triggers>
                     <Border Width="700" Height="35" Background="#DA251D" Margin="150, 0, 0, 0" CornerRadius="20">
                         <Label Margin="20, 0, 0, 0" Cursor="Hand" MouseDown="Nick_OnMouseDown" Content="Lorenzo Rizzotti" Foreground="White"
                                FontSize="18" HorizontalAlignment="Left" />
@@ -80,7 +145,7 @@
 
         
         
-        <Grid Margin="0, 0, 20,0" Grid.Row="1" Width="350" HorizontalAlignment="Left">
+        <Grid Margin="10, 10, 0,10" Grid.Row="1" Width="330" HorizontalAlignment="Left">
             <Grid.RowDefinitions>
                 <RowDefinition/>
                 <RowDefinition Height="90"/>
