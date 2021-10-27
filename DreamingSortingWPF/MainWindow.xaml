@@ -19,19 +19,20 @@
         </Grid.ColumnDefinitions>
         <Grid MouseDown="UIElement_OnMouseDown" Background="#0F0F2D" Grid.ColumnSpan="2">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
+                <ColumnDefinition />
+                <ColumnDefinition />
+                <ColumnDefinition />
+                <ColumnDefinition />
+                <ColumnDefinition />
+                <ColumnDefinition />
+                <ColumnDefinition />
+                <ColumnDefinition />
+                <ColumnDefinition />
+                <ColumnDefinition />
+                <ColumnDefinition />
             </Grid.ColumnDefinitions>
-            <Button Click="ButtonBase_OnClick" Content="X" Foreground="Red" FontSize="16" FontWeight="Bold" Grid.Column="10">
+            <Button Click="ButtonBase_OnClick" Content="X" Foreground="Red" FontSize="16" FontWeight="Bold"
+                    Grid.Column="10">
                 <Button.Style>
                     <Style TargetType="Button">
                         <Setter Property="Background" Value="Transparent" />
@@ -52,27 +53,62 @@
 
         <Grid Grid.Column="1" Grid.RowSpan="2" Margin="100, -400, -410, 85" Panel.ZIndex="-1">
             <Grid.RenderTransform>
-                <RotateTransform Angle="50"/>
+                <RotateTransform Angle="50" />
             </Grid.RenderTransform>
 
             <StackPanel Orientation="Horizontal" Margin="-350, 250, -255, -250">
                 <StackPanel>
-                    <Border Width="700" Height="35" Background="Red" Margin="150, 0, 0, 0" CornerRadius="20">
-                        <Label Cursor="Hand" MouseDown="Nick_OnMouseDown" Content="DreamingCodes" Foreground="White" FontSize="18" HorizontalAlignment="Right"></Label>
+                    <Border Width="700" Height="35" Background="#DA251D" Margin="150, 0, 0, 0" CornerRadius="20">
+                        <Label Cursor="Hand" MouseDown="Nick_OnMouseDown" Margin="0, 0, 20, 0" Content="DreamingCodes" Foreground="White"
+                               FontSize="18" HorizontalAlignment="Right" />
                     </Border>
-                    <Border Width="700" Height="35" Background="Yellow" Margin="0, 15, 0, 0" CornerRadius="20"/>
-                    <Border Width="700" Height="35" Background="Lightblue" Margin="75, 15, 0, 0" CornerRadius="20"/>
-                    <Border Width="700" Height="35" Background="Green" Margin="-100, 15, 0, 0" CornerRadius="20"/>
+                    <Border Width="700" Height="35" Background="#007CC3" Margin="0, 15, 0, 0" CornerRadius="20" />
+                    <Border Width="700" Height="35" Background="#009142" Margin="75, 15, 0, 0" CornerRadius="20" />
+                    <Border Width="700" Height="35" Background="#F8C300" Margin="-100, 15, 0, 0" CornerRadius="20" />
                 </StackPanel>
                 <StackPanel>
-                    <Border Width="700" Height="35" Background="Red" Margin="150, 0, 0, 0" CornerRadius="20">
-                        <Label Cursor="Hand" MouseDown="Nick_OnMouseDown" Content="Lorenzo Rizzotti" Foreground="White" FontSize="18" HorizontalAlignment="Left"></Label>
+                    <Border Width="700" Height="35" Background="#DA251D" Margin="150, 0, 0, 0" CornerRadius="20">
+                        <Label Margin="20, 0, 0, 0" Cursor="Hand" MouseDown="Nick_OnMouseDown" Content="Lorenzo Rizzotti" Foreground="White"
+                               FontSize="18" HorizontalAlignment="Left" />
                     </Border>
-                    <Border Width="700" Height="35" Background="Yellow" Margin="0, 15, 0, 0" CornerRadius="20"/>
-                    <Border Width="700" Height="35" Background="Lightblue" Margin="75, 15, 0, 0" CornerRadius="20"/>
-                    <Border Width="700" Height="35" Background="Green" Margin="-100, 15, 0, 0" CornerRadius="20"/>
+                    <Border Width="700" Height="35" Background="#007CC3" Margin="0, 15, 0, 0" CornerRadius="20" />
+                    <Border Width="700" Height="35" Background="#009142" Margin="75, 15, 0, 0" CornerRadius="20" />
+                    <Border Width="700" Height="35" Background="#F8C300" Margin="-100, 15, 0, 0" CornerRadius="20" />
                 </StackPanel>
             </StackPanel>
+        </Grid>
+
+        
+        
+        <Grid Margin="0, 0, 20,0" Grid.Row="1" Width="350" HorizontalAlignment="Left">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition Height="90"/>
+            </Grid.RowDefinitions>
+            <ScrollViewer Background="#29275C" VerticalScrollBarVisibility="Auto">
+                <ScrollViewer.Template>
+                    <ControlTemplate TargetType="ScrollViewer">
+                        <Border CornerRadius="12" Background="{TemplateBinding Background}">
+                        <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </ScrollViewer.Template>
+            </ScrollViewer>
+            <Button HorizontalAlignment="Right" Grid.ColumnSpan="2" Grid.Row="1" Content="+" Foreground="White" FontSize="34" VerticalAlignment="Center" Click="AddSortButton_OnClick">
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Setter Property="Background" Value="Purple" />
+                        <Setter Property="Cursor" Value="Hand" />
+                    </Style>
+                </Button.Style>
+                <Button.Template>
+                    <ControlTemplate TargetType="Button">
+                        <Border Width="80" Height="80" CornerRadius="12" Background="{TemplateBinding Background}">
+                            <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center" />
+                        </Border>
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
         </Grid>
     </Grid>
 </Window>

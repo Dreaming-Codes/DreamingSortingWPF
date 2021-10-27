@@ -27,5 +27,9 @@ namespace DreamingSortingWPF {
                 System.Diagnostics.Process.Start("https://dreaming.codes");
             }
         }
+        void AddSortButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

@@ -1,0 +1,15 @@
+﻿# Default ignored files
+/shelf/
+/workspace.xml
+# Rider ignored files
+/contentModel.xml
+/projectSettingsUpdater.xml
+/.idea.DreamingSortingWPF.iml
+/modules.xml
+# Datasource local storage ignored files
+/dataSources/
+/dataSources.local.xml
+.vs
+.idea
+DreamingSortingWPF/bin
+DreamingSortingWPF/obj
