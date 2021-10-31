@@ -154,13 +154,6 @@
                 <RowDefinition Height="90" />
             </Grid.RowDefinitions>
             <ScrollViewer x:Name="myScrollViewer" Background="#2B2B2B" VerticalScrollBarVisibility="Auto">
-                <ScrollViewer.Template>
-                    <ControlTemplate TargetType="ScrollViewer">
-                        <Border CornerRadius="12" Background="{TemplateBinding Background}">
-                            <ContentPresenter VerticalAlignment="Top" HorizontalAlignment="Left" />
-                        </Border>
-                    </ControlTemplate>
-                </ScrollViewer.Template>
                 <WrapPanel x:Name="nList" VerticalAlignment="Top" />
             </ScrollViewer>
             <Grid Grid.Row="1" x:Name="UserInteraction">
@@ -185,7 +178,7 @@
                         </ControlTemplate>
                     </Button.Template>
                 </Button>
-                <TextBox x:Name="nInput" MaxLength="17" PreviewTextInput="numberValidationTextBox" Grid.Column="0"
+                <TextBox KeyDown="NInput_OnKeyDown" x:Name="nInput" MaxLength="17" PreviewTextInput="numberValidationTextBox" Grid.Column="0"
                          Height="80" Width="240"
                          Foreground="White" Background="#202020"
                          HorizontalAlignment="Left" BorderThickness="0"

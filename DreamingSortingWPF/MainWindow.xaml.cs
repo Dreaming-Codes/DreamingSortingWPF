@@ -1,7 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
-using System.Globalization;
 using System.IO;
+using System.Linq;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
@@ -11,13 +12,15 @@ using System.Windows.Markup;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Xml;
+using DreamingSortingWPF.utils;
+using static DreamingSortingWPF.utils.GeneralUtils;
 
 namespace DreamingSortingWPF {
     /// <summary>
     ///     Interaction logic for MainWindow.xaml
     /// </summary>
     public partial class MainWindow {
-        Duration animDuration = new Duration(new TimeSpan(0, 0, 0, 0, 800));
+        Duration animDuration = new Duration(new TimeSpan(0, 0, 0, 0, 400));
 
         public MainWindow()
         {
@@ -34,26 +37,7 @@ namespace DreamingSortingWPF {
             Close();
         }
 
-        static T CloneXaml<T>(T source)
-        {
-            string xaml = XamlWriter.Save(source);
-            StringReader sr = new StringReader(xaml);
-            XmlReader xr = XmlReader.Create(sr);
-            return (T)XamlReader.Load(xr);
-        }
-        public static Size MeasureTextSize(string text, FontFamily fontFamily, FontStyle fontStyle, FontWeight fontWeight, FontStretch fontStretch,
-                                           double fontSize)
-        {
-            FormattedText ft = new FormattedText(text,
-                                                 CultureInfo.CurrentCulture,
-                                                 FlowDirection.LeftToRight,
-                                                 new Typeface(fontFamily, fontStyle, fontWeight, fontStretch),
-                                                 fontSize,
-                                                 Brushes.Black);
-
-            return new Size(ft.Width, ft.Height);
-        }
-
+        
         void Nick_OnMouseDown(object sender, MouseButtonEventArgs e)
         {
             if (e.LeftButton == MouseButtonState.Pressed) {
@@ -61,36 +45,45 @@ namespace DreamingSortingWPF {
             }
         }
         
-        
-        async void doAnimationAndAddValue()
+        async Task<bool> doAnimationAndAddValue()
         {
-            //I clone the input box to perform the animation
-            TextBox cloneInputForAnimation = CloneXaml(nInput);
-            UserInteraction.Children.Add(cloneInputForAnimation);
-
-            //Removing text from the realInput
-            nInput.Text = "";
-
-            //nInput.IsEnabled = false;
-
+            if (!int.TryParse(nInput.Text, out _)) {
+                return false;
+            }
+            
             //Calculation number width to create the containing box
-            Size textSize = MeasureTextSize(cloneInputForAnimation.Text,
-                                            cloneInputForAnimation.FontFamily, cloneInputForAnimation.FontStyle, cloneInputForAnimation.FontWeight,
-                                            cloneInputForAnimation.FontStretch, cloneInputForAnimation.FontSize);
+            Size textSize = MeasureTextSize(nInput);
 
             Size targetSize = textSize;
-            targetSize.Width += 10;
-            targetSize.Height += 10;
-
+            targetSize.Width += 20;
+            targetSize.Height += 20;
+            
             //Creating a new object wich is the one that will remain after the animation
-            TextBox targetInput = CloneXaml(cloneInputForAnimation);
+            TextBox targetInput = CloneXaml(nInput);
             targetInput.Visibility = Visibility.Hidden;
             targetInput.Width = targetSize.Width;
             targetInput.Height = targetSize.Height;
             nList.Children.Add(targetInput);
 
+            AsyncEventListener itChanged = new AsyncEventListener();
+            targetInput.Loaded += itChanged.Listen;
+
+            await itChanged.Successfully;
+
+            //I clone the input box to perform the animation
+            TextBox cloneInputForAnimation = CloneXaml(nInput);
+            UserInteraction.Children.Add(cloneInputForAnimation);
+
+            List<int> numbers = getNumbers(nList);
+            
+            //Randomizing next number
+            nInput.Text = new Random().Next(numbers.Min(), numbers.Max()).ToString();
+
+            nInput.SelectAll();
+            
+            //nInput.IsEnabled = false;
+
             //Obtaining the destination point
-            //TODO: Trovare un modo che funzioni per trovare le cordinate. Altrimenti ricorrere alla matematica
             Point targetPosition = targetInput.TransformToAncestor(rootView).Transform(new Point(0, 0));
 
             //Obtaining the current point
@@ -131,17 +124,24 @@ namespace DreamingSortingWPF {
             await Task.Delay(animDuration.TimeSpan);
             targetInput.Visibility = Visibility.Visible;
             UserInteraction.Children.Remove(cloneInputForAnimation);
+            
+            return true;
         }
 
 
         void numberValidationTextBox(object sender, TextCompositionEventArgs e)
         {
-            Regex regex = new Regex("[^0-9]+");
-            e.Handled = regex.IsMatch(e.Text);
+            e.Handled =  new Regex("[^0-9]+").IsMatch(e.Text);
         }
         void AddSortButton_OnClick(object sender, RoutedEventArgs e)
         {
             doAnimationAndAddValue();
+        }
+        void NInput_OnKeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter) {
+                doAnimationAndAddValue();
+            }
         }
     }
 }
