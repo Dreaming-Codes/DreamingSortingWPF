@@ -20,7 +20,7 @@ namespace DreamingSortingWPF {
     ///     Interaction logic for MainWindow.xaml
     /// </summary>
     public partial class MainWindow {
-        Duration animDuration = new Duration(new TimeSpan(0, 0, 0, 0, 400));
+        Duration animDuration = new Duration(new TimeSpan(0, 0, 0, 0, 200));
 
         public MainWindow()
         {
@@ -69,6 +69,8 @@ namespace DreamingSortingWPF {
             targetInput.Loaded += itChanged.Listen;
 
             await itChanged.Successfully;
+            
+            myScrollViewer.ScrollToEnd();
 
             //I clone the input box to perform the animation
             TextBox cloneInputForAnimation = CloneXaml(nInput);
