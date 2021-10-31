@@ -178,7 +178,8 @@
                         </ControlTemplate>
                     </Button.Template>
                 </Button>
-                <TextBox KeyDown="NInput_OnKeyDown" x:Name="nInput" MaxLength="17" PreviewTextInput="numberValidationTextBox" Grid.Column="0"
+                <TextBox KeyDown="NInput_OnKeyDown" x:Name="nInput" MaxLength="17"
+                         PreviewTextInput="numberValidationTextBox" Grid.Column="0"
                          Height="80" Width="240"
                          Foreground="White" Background="#202020"
                          HorizontalAlignment="Left" BorderThickness="0"

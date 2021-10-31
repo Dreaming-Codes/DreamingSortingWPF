@@ -9,7 +9,11 @@ using System.Xml;
 
 namespace DreamingSortingWPF.utils {
     public static class GeneralUtils {
-        public static Size MeasureTextSize(string text, FontFamily fontFamily, FontStyle fontStyle, FontWeight fontWeight, FontStretch fontStretch, double fontSize)
+        /// <summary>
+        ///     Measure the size of a text
+        /// </summary>
+        public static Size MeasureTextSize(string text, FontFamily fontFamily, FontStyle fontStyle, FontWeight fontWeight, FontStretch fontStretch,
+                                           double fontSize)
         {
             while (true) {
                 Typeface typeface = new Typeface(fontFamily, fontStyle, fontWeight, fontStretch);
@@ -38,16 +42,26 @@ namespace DreamingSortingWPF.utils {
                 return new Size(totalWidth, height);
             }
         }
+
+        /// <summary>
+        ///     Measure the size of a text
+        /// </summary>
         public static Size MeasureTextSize(TextBox element)
         {
             return MeasureTextSize(element.Text, element.FontFamily, element.FontStyle, element.FontWeight, element.FontStretch, element.FontSize);
         }
 
+        /// <summary>
+        ///     Gets the numbers within a WrapPanel
+        /// </summary>
         public static List<int> getNumbers(WrapPanel panel)
         {
-            return (from TextBox panelChild in panel.Children select int.Parse(panelChild.Text)).ToList();;
+            return (from TextBox panelChild in panel.Children select int.Parse(panelChild.Text)).ToList();
         }
-        
+
+        /// <summary>
+        ///     Clone a XAML element
+        /// </summary>
         public static T CloneXaml<T>(T source)
         {
             string xaml = XamlWriter.Save(source);

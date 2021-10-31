@@ -1,17 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using System.Windows.Markup;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
-using System.Xml;
 using DreamingSortingWPF.utils;
 using static DreamingSortingWPF.utils.GeneralUtils;
 
@@ -37,27 +34,27 @@ namespace DreamingSortingWPF {
             Close();
         }
 
-        
+
         void Nick_OnMouseDown(object sender, MouseButtonEventArgs e)
         {
             if (e.LeftButton == MouseButtonState.Pressed) {
                 Process.Start("https://dreaming.codes");
             }
         }
-        
+
         async Task<bool> doAnimationAndAddValue()
         {
             if (!int.TryParse(nInput.Text, out _)) {
                 return false;
             }
-            
+
             //Calculation number width to create the containing box
             Size textSize = MeasureTextSize(nInput);
 
             Size targetSize = textSize;
             targetSize.Width += 20;
             targetSize.Height += 20;
-            
+
             //Creating a new object wich is the one that will remain after the animation
             TextBox targetInput = CloneXaml(nInput);
             targetInput.Visibility = Visibility.Hidden;
@@ -69,7 +66,7 @@ namespace DreamingSortingWPF {
             targetInput.Loaded += itChanged.Listen;
 
             await itChanged.Successfully;
-            
+
             myScrollViewer.ScrollToEnd();
 
             //I clone the input box to perform the animation
@@ -77,12 +74,12 @@ namespace DreamingSortingWPF {
             UserInteraction.Children.Add(cloneInputForAnimation);
 
             List<int> numbers = getNumbers(nList);
-            
+
             //Randomizing next number
             nInput.Text = new Random().Next(numbers.Min(), numbers.Max()).ToString();
 
             nInput.SelectAll();
-            
+
             //nInput.IsEnabled = false;
 
             //Obtaining the destination point
@@ -126,23 +123,27 @@ namespace DreamingSortingWPF {
             await Task.Delay(animDuration.TimeSpan);
             targetInput.Visibility = Visibility.Visible;
             UserInteraction.Children.Remove(cloneInputForAnimation);
-            
+
             return true;
         }
 
 
         void numberValidationTextBox(object sender, TextCompositionEventArgs e)
         {
-            e.Handled =  new Regex("[^0-9]+").IsMatch(e.Text);
+            e.Handled = new Regex("[^0-9]+").IsMatch(e.Text);
         }
         void AddSortButton_OnClick(object sender, RoutedEventArgs e)
         {
+        #pragma warning disable CS4014
             doAnimationAndAddValue();
+        #pragma warning restore CS4014
         }
         void NInput_OnKeyDown(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.Enter) {
+            #pragma warning disable CS4014
                 doAnimationAndAddValue();
+            #pragma warning restore CS4014
             }
         }
     }

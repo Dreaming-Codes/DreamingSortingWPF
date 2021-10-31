@@ -2,6 +2,9 @@
 using System.Threading.Tasks;
 
 namespace DreamingSortingWPF.utils {
+    /// <summary>
+    ///     Allows you to wait for an event
+    /// </summary>
     public class AsyncEventListener {
         readonly Func<bool> _predicate;
 
