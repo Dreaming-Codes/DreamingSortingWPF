@@ -11,5 +11,5 @@
 /dataSources.local.xml
 .vs
 .idea
-DreamingSortingWPF/bin
-DreamingSortingWPF/obj
+./bin/
+./obj/
