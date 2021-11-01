@@ -20,6 +20,7 @@ namespace DreamingSortingWPF;
 public partial class MainWindow {
     Duration animDuration = new(new TimeSpan(0, 0, 0, 0, 200));
     Random randomSeeded = new();
+    bool isAlgoView = false;
 
     public MainWindow()
     {
@@ -218,5 +219,35 @@ public partial class MainWindow {
             nV--;
         }, delay);
 
+    }
+    void switchnListPage(object sender, MouseButtonEventArgs e)
+    {
+        if (isAlgoView) {
+            DoubleAnimation reset = new() {
+                Duration = new Duration(new TimeSpan(0, 0, 0, 0, 200)),
+                To = 0
+            };
+            userInputArea.RenderTransform.BeginAnimation(TranslateTransform.XProperty, reset);
+            switchPageButton.RenderTransform.BeginAnimation(RotateTransform.AngleProperty, reset);
+            isAlgoView = false;
+        }
+        else {
+            DoubleAnimation goLeft = new() {
+                Duration = new Duration(new TimeSpan(0, 0, 0, 0, 200)),
+                To = -400
+            };
+
+
+            userInputArea.RenderTransform.BeginAnimation(TranslateTransform.XProperty, goLeft);
+        
+
+            DoubleAnimation rotateAngle = new() {
+                Duration = new Duration(new TimeSpan(0, 0, 0, 0, 200)),
+                To = -90
+            };
+            
+            switchPageButton.RenderTransform.BeginAnimation(RotateTransform.AngleProperty, rotateAngle);
+            isAlgoView = true;
+        }
     }
 }
