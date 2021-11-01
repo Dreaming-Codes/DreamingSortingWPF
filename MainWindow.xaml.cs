@@ -19,8 +19,8 @@ namespace DreamingSortingWPF;
 /// </summary>
 public partial class MainWindow {
     Duration animDuration = new(new TimeSpan(0, 0, 0, 0, 200));
+    bool isAlgoView;
     Random randomSeeded = new();
-    bool isAlgoView = false;
 
     public MainWindow()
     {
@@ -227,25 +227,30 @@ public partial class MainWindow {
                 Duration = new Duration(new TimeSpan(0, 0, 0, 0, 200)),
                 To = 0
             };
-            userInputArea.RenderTransform.BeginAnimation(TranslateTransform.XProperty, reset);
-            switchPageButton.RenderTransform.BeginAnimation(RotateTransform.AngleProperty, reset);
-            isAlgoView = false;
-        }
-        else {
-            DoubleAnimation goLeft = new() {
-                Duration = new Duration(new TimeSpan(0, 0, 0, 0, 200)),
-                To = -400
-            };
-
-
-            userInputArea.RenderTransform.BeginAnimation(TranslateTransform.XProperty, goLeft);
-        
-
-            DoubleAnimation rotateAngle = new() {
+            DoubleAnimation resetAngle = new() {
                 Duration = new Duration(new TimeSpan(0, 0, 0, 0, 200)),
                 To = -90
             };
-            
+
+            userInteractionGrid.RenderTransform.BeginAnimation(TranslateTransform.YProperty, reset);
+            switchPageButton.RenderTransform.BeginAnimation(RotateTransform.AngleProperty, resetAngle);
+            isAlgoView = false;
+        }
+        else {
+            DoubleAnimation goUp = new() {
+                Duration = new Duration(new TimeSpan(0, 0, 0, 0, 200)),
+                To = -480
+            };
+
+
+            userInteractionGrid.RenderTransform.BeginAnimation(TranslateTransform.YProperty, goUp);
+
+
+            DoubleAnimation rotateAngle = new() {
+                Duration = new Duration(new TimeSpan(0, 0, 0, 0, 200)),
+                To = 90
+            };
+
             switchPageButton.RenderTransform.BeginAnimation(RotateTransform.AngleProperty, rotateAngle);
             isAlgoView = true;
         }
