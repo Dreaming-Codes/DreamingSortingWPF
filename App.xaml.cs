@@ -1,6 +1,6 @@
 ﻿using System.Windows;
 
-namespace updatedDreamingSortingWPF; 
+namespace updatedDreamingSortingWPF;
 
 /// <summary>
 ///     Interaction logic for App.xaml

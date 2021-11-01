@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Text.RegularExpressions;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -11,13 +12,14 @@ using DreamingSortingWPF.utils;
 using static DreamingSortingWPF.utils.GeneralUtils;
 
 
-namespace DreamingSortingWPF; 
+namespace DreamingSortingWPF;
 
 /// <summary>
 ///     Interaction logic for MainWindow.xaml
 /// </summary>
 public partial class MainWindow {
     Duration animDuration = new(new TimeSpan(0, 0, 0, 0, 200));
+    Random randomSeeded = new();
 
     public MainWindow()
     {
@@ -42,10 +44,42 @@ public partial class MainWindow {
         }
     }
 
-    async Task<bool> doAnimationAndAddValue()
+    async Task doAnimationAndAddValue()
     {
         if (!int.TryParse(nInput.Text, out _)) {
-            return false;
+
+            Brush originalBackground = addButton.Background;
+            addButton.Background = Brushes.Red;
+            DoubleAnimation goRight = new() {
+                Duration = new Duration(new TimeSpan(0, 0, 0, 0, 50)),
+                To = 10
+            };
+
+            DoubleAnimation goLeft = new() {
+                Duration = new Duration(new TimeSpan(0, 0, 0, 0, 50)),
+                To = -10
+            };
+
+            DoubleAnimation returnToBase = new() {
+                Duration = new Duration(new TimeSpan(0, 0, 0, 0, 50)),
+                To = 0
+            };
+
+            TranslateTransform myAddTranslateTransform = new();
+            addButton.RenderTransform = myAddTranslateTransform;
+            myAddTranslateTransform.BeginAnimation(TranslateTransform.XProperty, goRight);
+            await Task.Delay(50);
+            myAddTranslateTransform.BeginAnimation(TranslateTransform.XProperty, goLeft);
+            await Task.Delay(50);
+            myAddTranslateTransform.BeginAnimation(TranslateTransform.XProperty, goRight);
+            await Task.Delay(50);
+            myAddTranslateTransform.BeginAnimation(TranslateTransform.XProperty, goLeft);
+            await Task.Delay(50);
+            myAddTranslateTransform.BeginAnimation(TranslateTransform.XProperty, returnToBase);
+            await Task.Delay(50);
+            addButton.Background = originalBackground;
+
+            return;
         }
 
         //Calculation number width to create the containing box
@@ -67,7 +101,7 @@ public partial class MainWindow {
         UserInteraction.Children.Add(cloneInputForAnimation);
 
         //Randomizing next number
-        nInput.Text = new Random().Next(0, 1000).ToString();
+        nInput.Text = randomSeeded.Next(0, 1000).ToString();
 
         AsyncEventListener itChanged = new();
         targetInput.Loaded += itChanged.Listen;
@@ -121,7 +155,6 @@ public partial class MainWindow {
         targetInput.Visibility = Visibility.Visible;
         UserInteraction.Children.Remove(cloneInputForAnimation);
 
-        return true;
     }
 
 
@@ -149,7 +182,7 @@ public partial class MainWindow {
             randomClickHandler();
         }
     }
-    void randomClickHandler(object sender = null, RoutedEventArgs e = null)
+    void randomClickHandler(object? sender = null, RoutedEventArgs? e = null)
     {
         if (!uint.TryParse(randomNv.Text, out uint randomQuantity)) {
             randomNv.Text = "";
@@ -160,17 +193,30 @@ public partial class MainWindow {
         insertRandomValues(randomQuantity);
     }
 
-    async void insertRandomValues(uint nV)
+    void insertRandomValues(uint nV)
     {
-        int delay = 5000 / (int)nV;
+        int delay = 1000 / (int)nV;
         if (delay == 0) {
             delay = 1;
         }
 
-        for (int i = 0; i < nV; i++) {
-            nInput.Text = new Random().Next(0, 1000).ToString();
-            doAnimationAndAddValue();
-            await Task.Delay(delay);
-        }
+        Timer? myTimer = null;
+        myTimer = SetIntervalThread(() => {
+            if (nV <= 0) {
+                // ReSharper disable once AccessToModifiedClosure
+                myTimer?.Dispose();
+                return;
+            }
+
+            nInput.Dispatcher.BeginInvoke(() => {
+                nInput.Text = randomSeeded.Next(0, 1000).ToString();
+            #pragma warning disable CS4014
+                doAnimationAndAddValue();
+            #pragma warning restore CS4014
+            });
+
+            nV--;
+        }, delay);
+
     }
 }

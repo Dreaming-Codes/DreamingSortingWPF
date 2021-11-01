@@ -1,13 +1,15 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Markup;
 using System.Windows.Media;
 using System.Xml;
 
-namespace DreamingSortingWPF.utils; 
+namespace DreamingSortingWPF.utils;
 
 public static class GeneralUtils {
     /// <summary>
@@ -69,5 +71,15 @@ public static class GeneralUtils {
         StringReader sr = new(xaml);
         XmlReader xr = XmlReader.Create(sr);
         return (T)XamlReader.Load(xr);
+    }
+
+    /// <summary>
+    ///     Usage: var timer = SetIntervalThread(DoThis, 1000);
+    ///     UI Usage: BeginInvoke((Action)(() =>{ SetIntervalThread(DoThis, 1000); }));
+    /// </summary>
+    /// <returns>Returns a timer object which can be disposed.</returns>
+    public static Timer? SetIntervalThread(Action Act, int Interval)
+    {
+        return new Timer(_ => { Act(); }, null, 0, Interval);
     }
 }

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 
-namespace DreamingSortingWPF.utils; 
+namespace DreamingSortingWPF.utils;
 
 /// <summary>
 ///     Allows you to wait for an event
