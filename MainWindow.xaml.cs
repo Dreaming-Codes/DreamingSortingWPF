@@ -48,38 +48,13 @@ public partial class MainWindow {
     async Task doAnimationAndAddValue()
     {
         if (!int.TryParse(nInput.Text, out _)) {
-
-            Brush originalBackground = addButton.Background;
+            Brush originalBrush = addButton.Background;
+            if (originalBrush == Brushes.Red) {
+                return;
+            }
             addButton.Background = Brushes.Red;
-            DoubleAnimation goRight = new() {
-                Duration = new Duration(new TimeSpan(0, 0, 0, 0, 50)),
-                To = 10
-            };
-
-            DoubleAnimation goLeft = new() {
-                Duration = new Duration(new TimeSpan(0, 0, 0, 0, 50)),
-                To = -10
-            };
-
-            DoubleAnimation returnToBase = new() {
-                Duration = new Duration(new TimeSpan(0, 0, 0, 0, 50)),
-                To = 0
-            };
-
-            TranslateTransform myAddTranslateTransform = new();
-            addButton.RenderTransform = myAddTranslateTransform;
-            myAddTranslateTransform.BeginAnimation(TranslateTransform.XProperty, goRight);
-            await Task.Delay(50);
-            myAddTranslateTransform.BeginAnimation(TranslateTransform.XProperty, goLeft);
-            await Task.Delay(50);
-            myAddTranslateTransform.BeginAnimation(TranslateTransform.XProperty, goRight);
-            await Task.Delay(50);
-            myAddTranslateTransform.BeginAnimation(TranslateTransform.XProperty, goLeft);
-            await Task.Delay(50);
-            myAddTranslateTransform.BeginAnimation(TranslateTransform.XProperty, returnToBase);
-            await Task.Delay(50);
-            addButton.Background = originalBackground;
-
+            await AnimationUtils.doErrorAnimOnElement(addButton);
+            addButton.Background = originalBrush;
             return;
         }
 
@@ -183,13 +158,21 @@ public partial class MainWindow {
             randomClickHandler();
         }
     }
-    void randomClickHandler(object? sender = null, RoutedEventArgs? e = null)
+    async void randomClickHandler(object? sender = null, RoutedEventArgs? e = null)
     {
         if (!uint.TryParse(randomNv.Text, out uint randomQuantity)) {
             randomNv.Text = "";
+            Brush originalBrush = randomNv.Background;
+            if (originalBrush == Brushes.Red) {
+                return;
+            }
+            randomNv.Background = Brushes.Red;
+            randomButton.Background = Brushes.Red;
+            await AnimationUtils.doErrorAnimOnElement(randomGrid);
+            randomNv.Background = originalBrush;
+            randomButton.Background = originalBrush;
             return;
         }
-
         randomNv.Text = "";
         insertRandomValues(randomQuantity);
     }
