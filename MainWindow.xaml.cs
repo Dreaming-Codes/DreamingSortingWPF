@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Text.RegularExpressions;
 using System.Threading;
@@ -9,6 +10,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 using DreamingSortingWPF.utils;
+using updatedDreamingSortingWPF;
+using updatedDreamingSortingWPF.algorithms;
 using static DreamingSortingWPF.utils.GeneralUtils;
 
 
@@ -25,7 +28,22 @@ public partial class MainWindow {
     public MainWindow()
     {
         InitializeComponent();
+        fillAlgorithmsList();
     }
+    void fillAlgorithmsList()
+    {
+        Dictionary<string, SortingInterface> algorithms = new Dictionary<string, SortingInterface> {
+            { "QuickSort", new QuickSort() }
+        };
+
+        foreach (KeyValuePair<string, SortingInterface> keyValuePair in algorithms) {
+            
+            //mySelectList.Children.Add()
+        }
+
+
+    }
+    
     void UIElement_OnMouseDown(object sender, MouseButtonEventArgs e)
     {
         if (e.LeftButton == MouseButtonState.Pressed) {

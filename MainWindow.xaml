@@ -251,7 +251,7 @@
                         </Grid>
                     </Grid>
                 </Grid>
-                <ScrollViewer x:Name="userSelectArea" Margin="0, 15, 0, 0" Height="445" Width="330"
+                <ScrollViewer Margin="0, 15, 0, 0" Height="445" Width="330"
                               Background="#2B2B2B"
                               VerticalScrollBarVisibility="Auto">
                     <WrapPanel x:Name="mySelectList" VerticalAlignment="Top" />
