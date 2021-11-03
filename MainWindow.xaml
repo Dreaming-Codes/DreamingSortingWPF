@@ -151,17 +151,17 @@
                 <ColumnDefinition/>
                 <ColumnDefinition Width="40"/>
             </Grid.ColumnDefinitions>
-            <StackPanel Margin="0, 15, 0, 0" HorizontalAlignment="Left" Orientation="Vertical" Height="960" x:Name="userInteractionGrid">
+            <StackPanel Margin="8, 2, 0, 0" HorizontalAlignment="Left" Orientation="Vertical" Height="960" x:Name="userInteractionGrid">
                 <StackPanel.RenderTransform>
                     <TranslateTransform />
                 </StackPanel.RenderTransform>
-                <Grid Height="480" Margin="0, -20, 0, 0" >
+                <Grid Height="480" >
 
                     <Grid.RowDefinitions>
                         <RowDefinition Height="480" />
                         <RowDefinition Height="480" />
                     </Grid.RowDefinitions>
-                    <Grid Margin="10, 10, 0,10" Grid.Column="0" Width="330">
+                    <Grid Height="455" Grid.Column="0" Width="330">
                         <Grid.RowDefinitions>
                             <RowDefinition />
                             <RowDefinition Height="90" />
@@ -248,7 +248,7 @@
                         </Grid>
                     </Grid>
                 </Grid>
-                <ScrollViewer x:Name="userSelectArea" Grid.Column="0" Grid.Row="1" Margin="0, 15, 0, 0" Height="455" Width="330"
+                <ScrollViewer x:Name="userSelectArea" Grid.Column="0" Grid.Row="1" Margin="0, 15, 0, 0" Height="445" Width="330"
                               Background="#2B2B2B"
                               VerticalScrollBarVisibility="Auto">
                     <WrapPanel x:Name="mySelectList" VerticalAlignment="Top" />
