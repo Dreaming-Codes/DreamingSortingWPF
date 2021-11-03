@@ -227,6 +227,7 @@ public partial class MainWindow {
                 Duration = new Duration(new TimeSpan(0, 0, 0, 0, 200)),
                 To = 0
             };
+
             DoubleAnimation resetAngle = new() {
                 Duration = new Duration(new TimeSpan(0, 0, 0, 0, 200)),
                 To = -90
