@@ -265,7 +265,7 @@
                 </TextBlock.RenderTransformOrigin>
 
                 <TextBlock.RenderTransform>
-                    <RotateTransform Angle="180" />
+                    <RotateTransform Angle="-90" />
                 </TextBlock.RenderTransform>
             </TextBlock>
         </Grid>
