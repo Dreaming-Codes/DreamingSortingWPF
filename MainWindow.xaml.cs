@@ -52,6 +52,7 @@ public partial class MainWindow {
             if (originalBrush == Brushes.Red) {
                 return;
             }
+
             addButton.Background = Brushes.Red;
             await AnimationUtils.doErrorAnimOnElement(addButton);
             addButton.Background = originalBrush;
@@ -166,6 +167,7 @@ public partial class MainWindow {
             if (originalBrush == Brushes.Red) {
                 return;
             }
+
             randomNv.Background = Brushes.Red;
             randomButton.Background = Brushes.Red;
             await AnimationUtils.doErrorAnimOnElement(randomGrid);
@@ -173,6 +175,7 @@ public partial class MainWindow {
             randomButton.Background = originalBrush;
             return;
         }
+
         randomNv.Text = "";
         insertRandomValues(randomQuantity);
     }

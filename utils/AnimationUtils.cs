@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 
-namespace DreamingSortingWPF.utils; 
+namespace DreamingSortingWPF.utils;
 
 public static class AnimationUtils {
     public static async Task doErrorAnimOnElement(FrameworkElement element)
