@@ -61,6 +61,23 @@ public static class GeneralUtils {
     {
         return (from TextBox panelChild in panel.Children select int.Parse(panelChild.Text)).ToList();
     }
+    
+    /// <summary>
+    /// Swap two elements in a list
+    /// </summary>
+    public static void Swap<T>(IList<T> list, int indexA, int indexB)
+    {
+        (list[indexA], list[indexB]) = (list[indexB], list[indexA]);
+    }
+
+    public static void SwapBorderProperties(Border firstElement, Border secondElement)
+    {
+        (firstElement.Height, secondElement.Height) = (secondElement.Height, firstElement.Height);
+        
+        (firstElement.Background, secondElement.Background) = (secondElement.Background, firstElement.Background);
+        
+        (firstElement.DataContext, secondElement.DataContext) = (secondElement.DataContext, firstElement.DataContext);
+    }
 
     /// <summary>
     ///     Clone a XAML element

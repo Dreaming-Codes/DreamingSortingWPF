@@ -16,7 +16,7 @@ public abstract partial class SortingInterface : Window {
     {
         InitializeComponent();
         
-        double scale = 880.0 / (numbers.Max() - numbers.Min());
+        double scale = 300.0 / (numbers.Max() - numbers.Min());
         foreach (int number in numbers) {
             Border line = new() {
                 Height = number * scale,
