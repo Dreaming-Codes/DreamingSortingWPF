@@ -32,18 +32,37 @@ public partial class MainWindow {
     }
     void fillAlgorithmsList()
     {
-        Dictionary<string, SortingInterface> algorithms = new Dictionary<string, SortingInterface> {
-            { "QuickSort", new QuickSort() }
+        Dictionary<string, Type> algorithms = new() {
+            { "QuickSort", typeof(QuickSort)}
         };
+        
+        foreach (KeyValuePair<string, Type> keyValuePair in algorithms) {
+            Button button = new Button {
+                Content = keyValuePair.Key,
+                Width = 100,
+                Height = 30,
+                Margin = new Thickness(10, 10, 10, 10),
+                HorizontalAlignment = HorizontalAlignment.Left,
+                VerticalAlignment = VerticalAlignment.Top,
+                Background = new BrushConverter().ConvertFrom("#202020") as Brush,
+                FontSize = 16,
+                FontWeight = FontWeights.Bold,
+                Foreground = Brushes.White,
+                Tag = keyValuePair.Value
+            };
 
-        foreach (KeyValuePair<string, SortingInterface> keyValuePair in algorithms) {
             
-            //mySelectList.Children.Add()
+
+            button.Click += (_, _) => {
+                SortingInterface sortingInterfaceInstance = (SortingInterface)Activator.CreateInstance(keyValuePair.Value, getNumbers(nList))!;
+                sortingInterfaceInstance.Show();
+            };
+            mySelectList.Children.Add(button);
         }
 
 
     }
-    
+
     void UIElement_OnMouseDown(object sender, MouseButtonEventArgs e)
     {
         if (e.LeftButton == MouseButtonState.Pressed) {
@@ -52,7 +71,7 @@ public partial class MainWindow {
     }
     void ButtonBase_OnClick(object sender, RoutedEventArgs e)
     {
-        Close();
+        Application.Current.Shutdown();
     }
 
 

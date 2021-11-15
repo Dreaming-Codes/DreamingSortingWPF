@@ -1,5 +1,15 @@
-﻿namespace updatedDreamingSortingWPF.algorithms;
+﻿using System.Collections.Generic;
 
-public class QuickSort: SortingInterface {
+namespace updatedDreamingSortingWPF.algorithms;
+
+public class QuickSort : SortingInterface {
     
+    public QuickSort(List<int> numbers) : base(numbers)
+    {
+    }
+    
+    public override void sort()
+    {
+        
+    }
 }

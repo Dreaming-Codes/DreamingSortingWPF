@@ -4,6 +4,13 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         mc:Ignorable="d"
-        Title="SortingInterface" Height="450" Width="800">
-    <Grid />
+        Height="500" Width="900"
+        WindowStyle="None"
+        ResizeMode="NoResize" Background="Black"
+        Title="SortingInterface" KeyDown="SortingInterface_OnKeyDown">
+
+    <Grid>
+        <StackPanel Width="880" Height="480" x:Name="lineInterface" Orientation="Horizontal"
+                    HorizontalAlignment="Center" VerticalAlignment="Center" />
+    </Grid>
 </Window>
