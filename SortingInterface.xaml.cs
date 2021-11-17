@@ -16,7 +16,7 @@ public abstract partial class SortingInterface : Window {
     {
         InitializeComponent();
         
-        double scale = 300.0 / (numbers.Max() - numbers.Min());
+        double scale = 480.0 / (numbers.Max() - numbers.Min());
         foreach (int number in numbers) {
             Border line = new() {
                 Height = number * scale,
@@ -24,8 +24,9 @@ public abstract partial class SortingInterface : Window {
                 Background = Brushes.White,
                 VerticalAlignment = VerticalAlignment.Bottom,
                 Margin = new Thickness(10, 0, 0, 0),
-                DataContext = number
+                Tag = number
             };
+
             this.lines.Add(line);
             
             lineInterface.Children.Add(line);

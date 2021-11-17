@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using System.Windows.Controls;
 using System.Windows.Media;
 using DreamingSortingWPF.utils;
@@ -19,15 +18,10 @@ public class QuickSort : SortingInterface {
     
     public override void sort()
     {
-        if (indexToOrder.Count != 0) {
-            startIndex = indexToOrder.First().Key;
-            endIndex = indexToOrder.First().Value;
-            indexToOrder.Pop();
-            
-            foreach (Border border in lines) {
-                border.Background = Brushes.White;
-            }
-            
+
+        if(indexToOrder.Count != 0) {
+            (startIndex, endIndex) = indexToOrder.Pop();
+
             int pivotIndex = pivotSort(startIndex, endIndex);
 
             if(pivotIndex - 1 > startIndex) {
@@ -47,16 +41,16 @@ public class QuickSort : SortingInterface {
         pivot.Background = Brushes.Red;
         
         int pivotIndex = startIndex;
-        
+
         //Itero fra tutti gli elementi apparte l'ultimo elemento per evitare il pivot alla prima iterazione
         for (int i = startIndex; i < endIndex; i++) {
-            if ((int) lines[i].DataContext <= (int)pivot.DataContext) {
+            if ((int) lines[i].Tag <= (int) pivot.Tag) {
                 GeneralUtils.SwapBorderProperties(lines[i], lines[pivotIndex]);
                 pivotIndex++;
             }
         }
         
         GeneralUtils.SwapBorderProperties(lines[pivotIndex], lines[endIndex]);
-        return startIndex;
+        return pivotIndex;
     }
 }

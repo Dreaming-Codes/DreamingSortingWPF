@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Threading;
@@ -65,9 +66,10 @@ public static class GeneralUtils {
     /// <summary>
     /// Swap two elements in a list
     /// </summary>
-    public static void Swap<T>(IList<T> list, int indexA, int indexB)
+    public static IList<T> Swap<T>(this IList<T> list, int indexA, int indexB)
     {
         (list[indexA], list[indexB]) = (list[indexB], list[indexA]);
+        return list;
     }
 
     public static void SwapBorderProperties(Border firstElement, Border secondElement)
@@ -76,7 +78,13 @@ public static class GeneralUtils {
         
         (firstElement.Background, secondElement.Background) = (secondElement.Background, firstElement.Background);
         
-        (firstElement.DataContext, secondElement.DataContext) = (secondElement.DataContext, firstElement.DataContext);
+        (firstElement.Tag, secondElement.Tag) = (secondElement.Tag, firstElement.Tag);
+    }
+    
+    public static void OpenURL(string url)
+    {
+        url = url.Replace("&", "^&");
+        Process.Start(new ProcessStartInfo("cmd", $"/c start {url}") { CreateNoWindow = true });
     }
 
     /// <summary>

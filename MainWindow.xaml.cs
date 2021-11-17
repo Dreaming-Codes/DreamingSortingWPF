@@ -10,6 +10,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 using DreamingSortingWPF.utils;
+using Microsoft.VisualBasic.CompilerServices;
 using updatedDreamingSortingWPF;
 using updatedDreamingSortingWPF.algorithms;
 using static DreamingSortingWPF.utils.GeneralUtils;
@@ -78,7 +79,7 @@ public partial class MainWindow {
     void Nick_OnMouseDown(object sender, MouseButtonEventArgs e)
     {
         if (e.LeftButton == MouseButtonState.Pressed) {
-            Process.Start("https://dreaming.codes");
+            OpenURL("https://dreaming.codes");
         }
     }
 
