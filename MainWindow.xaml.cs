@@ -34,9 +34,10 @@ public partial class MainWindow {
     void fillAlgorithmsList()
     {
         Dictionary<string, Type> algorithms = new() {
-            { "QuickSort", typeof(QuickSort)}
+            { "QuickSort", typeof(QuickSort) },
+            { "SelectionSort", typeof(SelectionSort) }
         };
-        
+
         foreach (KeyValuePair<string, Type> keyValuePair in algorithms) {
             Button button = new Button {
                 Content = keyValuePair.Key,
@@ -52,12 +53,12 @@ public partial class MainWindow {
                 Tag = keyValuePair.Value
             };
 
-            
 
             button.Click += (_, _) => {
                 SortingInterface sortingInterfaceInstance = (SortingInterface)Activator.CreateInstance(keyValuePair.Value, getNumbers(nList))!;
                 sortingInterfaceInstance.Show();
             };
+
             mySelectList.Children.Add(button);
         }
 

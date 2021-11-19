@@ -15,7 +15,7 @@ public abstract partial class SortingInterface : Window {
     public SortingInterface(List<int> numbers)
     {
         InitializeComponent();
-        
+
         double scale = 480.0 / (numbers.Max() - numbers.Min());
         foreach (int number in numbers) {
             Border line = new() {
@@ -28,13 +28,13 @@ public abstract partial class SortingInterface : Window {
             };
 
             this.lines.Add(line);
-            
+
             lineInterface.Children.Add(line);
         }
     }
 
     public abstract void sort();
-    
+
     void SortingInterface_OnKeyDown(object sender, KeyEventArgs e)
     {
         sort();
