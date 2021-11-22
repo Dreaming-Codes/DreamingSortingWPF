@@ -13,7 +13,7 @@ public abstract partial class SortingInterface : Window {
     public SortingInterface(List<int> numbers)
     {
         InitializeComponent();
-        
+
         int min = numbers.Min();
         double scale = 480.0 / (numbers.Max() - min);
         foreach (int number in numbers) {

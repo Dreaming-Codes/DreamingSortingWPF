@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
@@ -10,7 +9,6 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 using DreamingSortingWPF.utils;
-using Microsoft.VisualBasic.CompilerServices;
 using updatedDreamingSortingWPF;
 using updatedDreamingSortingWPF.algorithms;
 using static DreamingSortingWPF.utils.GeneralUtils;
@@ -39,7 +37,7 @@ public partial class MainWindow {
         };
 
         foreach (KeyValuePair<string, Type> keyValuePair in algorithms) {
-            Button button = new Button {
+            Button button = new() {
                 Content = keyValuePair.Key,
                 Width = 100,
                 Height = 30,

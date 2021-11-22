@@ -64,7 +64,7 @@ public static class GeneralUtils {
     }
 
     /// <summary>
-    /// Swap two elements in a list
+    ///     Swap two elements in a list
     /// </summary>
     public static IList<T> Swap<T>(this IList<T> list, int indexA, int indexB)
     {

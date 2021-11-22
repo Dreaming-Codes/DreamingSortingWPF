@@ -6,9 +6,9 @@ using DreamingSortingWPF.utils;
 namespace updatedDreamingSortingWPF.algorithms;
 
 public class QuickSort : SortingInterface {
-    Stack<KeyValuePair<int, int>> indexToOrder = new();
-    int startIndex = 0;
     int endIndex;
+    Stack<KeyValuePair<int, int>> indexToOrder = new();
+    int startIndex;
 
     public QuickSort(List<int> numbers) : base(numbers)
     {
