@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -15,11 +13,12 @@ public abstract partial class SortingInterface : Window {
     public SortingInterface(List<int> numbers)
     {
         InitializeComponent();
-
-        double scale = 480.0 / (numbers.Max() - numbers.Min());
+        
+        int min = numbers.Min();
+        double scale = 480.0 / (numbers.Max() - min);
         foreach (int number in numbers) {
             Border line = new() {
-                Height = number * scale,
+                Height = (number - min) * scale,
                 Width = 10,
                 Background = Brushes.White,
                 VerticalAlignment = VerticalAlignment.Bottom,
@@ -27,7 +26,7 @@ public abstract partial class SortingInterface : Window {
                 Tag = number
             };
 
-            this.lines.Add(line);
+            lines.Add(line);
 
             lineInterface.Children.Add(line);
         }

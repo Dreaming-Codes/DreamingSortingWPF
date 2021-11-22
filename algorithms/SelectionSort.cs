@@ -25,6 +25,7 @@ public class SelectionSort : SortingInterface {
         }
         lines[currentIteration].Background = Brushes.Red;
         foreach (Border line in lines.Skip(currentIteration+1)) {
+            line.Background = Brushes.Red;
             if ((int)line.Tag < (int)min.Tag) {
                 min = line;
             }
